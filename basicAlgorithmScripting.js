@@ -28,3 +28,12 @@ const repeatStringNumTimes = (str = '', num = 0) => {
 
   return newStr;
 }
+
+
+const  truncateString = (str, num) => str.length > num ? `${str.slice(0, num)}...` : str;
+
+const findElement = (arr, func) => arr.find(func);
+
+const booWho = bool => typeof bool === 'boolean';
+
+const titleCase = (str) => str.toLowerCase().replace(/^\w|\s\w/g, (match) => match.toUpperCase());
