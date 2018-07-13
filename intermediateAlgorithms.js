@@ -45,3 +45,27 @@ const spinalCase = str =>
       str => (/[a-z]/.test(str) ? `${str}-` : '-')
     )
     .toLowerCase();
+
+const pigS = str => str.replace(/([^aeiou]+)(\w+)/, '$2$1ay');
+
+const Pigme = str => (/^[aeiou]/.test(str) ? `${str}way` : pigS(str));
+
+const translatePig = str => {
+  const [firstChar] = str;
+
+  if (/[aeiou]/.test(firstChar)) {
+    return `${str}way`;
+  }
+
+  let firstVowelIndex = str.split('').findIndex(elem => /[aeiou]/.test(elem));
+  firstVowelIndex = firstVowelIndex < 0 ? str.length : firstVowelIndex;
+
+  return `${str.slice(firstVowelIndex)}${str.slice(0, firstVowelIndex)}ay`;
+};
+
+const myReplace = (str, before, after) =>
+  str.replace(
+    before,
+    m =>
+      m[0].charCodeAt(0) < 97 ? after[0].toUpperCase() + after.slice(1) : after
+  );
