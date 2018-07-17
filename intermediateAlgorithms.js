@@ -69,3 +69,34 @@ const myReplace = (str, before, after) =>
     m =>
       m[0].charCodeAt(0) < 97 ? after[0].toUpperCase() + after.slice(1) : after
   );
+
+//takes a dna strand and returns a 2d array with each characters missing elements
+const pairELement = ([...str]) => {
+  const pairs = {
+    A: 'T',
+    T: 'A',
+    C: 'G',
+    G: 'C'
+  };
+
+  return str.map(elem => [elem, pairs[elem]]);
+};
+
+//finds the missing letter in a letter range or returns undefined
+const hasMissingLetter = (elem, index, arr) =>
+  index !== arr.length - 1 &&
+  arr[index + 1].charCodeAt(0) - elem.charCodeAt(0) !== 1;
+
+const findCharB4 = arr => arr.find(hasMissingLetter);
+
+const nextChar = char => String.fromCharCode(char.charCodeAt(0) + 1);
+
+const missingLetter = ([...str]) =>
+  findCharB4(str) ? nextChar(findCharB4(str)) : findCharB4(str);
+
+//joins 2 arrays and removes any duplicates.
+const removeDupes = (accu, curr, index, arr) =>
+  arr.indexOf(curr) === index ? [...accu, curr] : accu;
+
+const sortedArray = (arr0, arr1) => [...arr0, ...arr1].reduce(removeDupes, []);
+console.log(sortedArray([7, 1, 2, 3, 4, 5], [3, 5, 6, 7]));
