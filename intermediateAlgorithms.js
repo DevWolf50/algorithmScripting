@@ -100,3 +100,32 @@ const removeDupes = (accu, curr, index, arr) =>
 
 const sortedArray = (arr0, arr1) => [...arr0, ...arr1].reduce(removeDupes, []);
 console.log(sortedArray([7, 1, 2, 3, 4, 5], [3, 5, 6, 7]));
+
+//takes a string and converts characters to their coresponding html entity
+const convertHTML = str => {
+  const key = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    '\'': '&apos;'
+  };
+  return str.replace(/[&<>"']/g, m => key[m]);
+};
+
+//sums all odd Fibonacci numbers up to your argument
+
+//creates an array of the Fibonacci sequence up to the number given
+function fibbList(end = 0, list = [0, 1]) {
+  if (list[list.length - 1] + list[list.length - 2] > end) {
+    return list;
+  }
+  const nextFibNum = list[list.length - 1] + list[list.length - 2];
+
+  return fibbList(end, [...list, nextFibNum]);
+}
+
+//sums all odd numbers in an array
+const sumOddNums = (sum, curr) => (curr % 2 != 0 ? curr + sum : sum);
+
+const sumOddFibb = num => fibbList(num).reduce(sumOddNums, 0);
