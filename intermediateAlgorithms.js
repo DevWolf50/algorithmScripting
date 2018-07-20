@@ -129,3 +129,52 @@ function fibbList(end = 0, list = [0, 1]) {
 const sumOddNums = (sum, curr) => (curr % 2 != 0 ? curr + sum : sum);
 
 const sumOddFibb = num => fibbList(num).reduce(sumOddNums, 0);
+
+//sum all prime numbers to a given number
+function isPrime(num = 0, curr = num - 1) {
+  if (curr == 1) {
+    return true;
+  }
+
+  if (num % curr == 0) {
+    return false;
+  }
+
+  return isPrime(num, curr - 1);
+}
+
+function primeList(num = 0, list = []) {
+  if (num == 1) {
+    return list;
+  }
+
+  list = isPrime(num) ? [num, ...list] : list;
+  return primeList(num - 1, list);
+}
+
+const sumArray = (sum, num) => sum + num;
+
+const sumPrimes = (num = 0) => primeList(num).reduce(sumArray);
+
+//find the lowest common factorial within a range of numbers
+const isFactorial = (num0 = 0, num1 = 0) => num0 % num1 === 0;
+
+const checkIfCommonFactorial = (arr = [], num = 0) =>
+  arr.every(elem => isFactorial(num, elem));
+
+//create an array of range of numbers given an array of 2 numbers sorted
+const createRangedArray = ([start = 0, end = 0], rangedArray = []) =>
+  start > end
+    ? rangedArray
+    : createRangedArray([start + 1, end], [...rangedArray, start]);
+
+const findLowestCommonFactorial = (arr, num = arr[1]) =>
+  checkIfCommonFactorial(createRangedArray(arr), num)
+    ? num
+    : findLowestCommonFactorial(arr, num + 1);
+
+//iterates through an array using a function to check for a condition once the condition returns true return the rest of the array
+const drop = (arr = [], index = 0) => (index < 0 ? [] : arr.slice(index));
+const dropping = (arr = [], fn) => drop(arr, arr.findIndex(fn));
+
+console.log();
