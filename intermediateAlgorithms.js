@@ -177,4 +177,16 @@ const findLowestCommonFactorial = (arr, num = arr[1]) =>
 const drop = (arr = [], index = 0) => (index < 0 ? [] : arr.slice(index));
 const dropping = (arr = [], fn) => drop(arr, arr.findIndex(fn));
 
-console.log();
+//recursively flatten an array
+const flat = (arr = [], flatArr = []) =>
+  arr.reduce(
+    (accu, curr) => (Array.isArray(curr) ? flat(curr, accu) : [...accu, curr]),
+    flatArr
+  );
+
+//convert binary string to text
+const binaryConversion = (str = '') =>
+  str
+    .split(' ')
+    .map(elem => String.fromCharCode(Number.parseInt(elem, 2)))
+    .join('');
