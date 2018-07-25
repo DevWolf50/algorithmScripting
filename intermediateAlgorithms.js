@@ -190,3 +190,26 @@ const binaryConversion = (str = '') =>
     .split(' ')
     .map(elem => String.fromCharCode(Number.parseInt(elem, 2)))
     .join('');
+
+//check if all collections in an array have a truthy value of a specific prop
+const truthyCheck = (collection = [], prop = '') =>
+  collection.every(elem => elem[prop]);
+
+//a function that will sum two numbers together
+function addTogether(num1, num2) {
+  if (typeof num1 != 'number') {
+    return undefined;
+  }
+  //if no 2nd argument
+  if (!num2) {
+    return sum;
+  }
+
+  function sum(num2) {
+    return typeof num2 != 'number' ? undefined : num1 + num2;
+  }
+
+  return sum(num2);
+}
+
+console.log(addTogether(1)(8));
