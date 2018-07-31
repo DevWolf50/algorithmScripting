@@ -212,4 +212,22 @@ function addTogether(num1, num2) {
   return sum(num2);
 }
 
-console.log(addTogether(1)(8));
+
+//create a person with set and get methods
+const Person = function(firstAndLast) {
+  let fullName;
+
+  this.getFullName = () => fullName.join(' ');
+  this.getFirstName = () => fullName[0];
+  this.getLastName = () => fullName[1];
+
+  this.setfirstName = (firstName) => {
+    fullName[0] = firstName;
+  }
+  this.setLastName = (LastName) => {
+    fullName[1] = newLastName;
+  }
+  this.setFullName = (full) => {
+    fullName = fullName.split(/\s/);
+  }
+}
