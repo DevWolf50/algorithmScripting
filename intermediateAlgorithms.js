@@ -212,7 +212,6 @@ function addTogether(num1, num2) {
   return sum(num2);
 }
 
-
 //create a person with set and get methods
 const Person = function(firstAndLast) {
   let fullName;
@@ -221,13 +220,27 @@ const Person = function(firstAndLast) {
   this.getFirstName = () => fullName[0];
   this.getLastName = () => fullName[1];
 
-  this.setfirstName = (firstName) => {
+  this.setfirstName = firstName => {
     fullName[0] = firstName;
-  }
-  this.setLastName = (LastName) => {
+  };
+  this.setLastName = LastName => {
     fullName[1] = newLastName;
-  }
-  this.setFullName = (full) => {
+  };
+  this.setFullName = full => {
     fullName = fullName.split(/\s/);
-  }
-}
+  };
+};
+
+// map debris
+// takes an array of objects containing the name and avg altitude
+// returns an array of objects replacing the altitude with oribital periods in seconds
+
+const mapDebris = arr =>
+  arr.map(({ name, avgAlt }) => {
+    return {
+      name,
+      orbitalPeriod: Math.round(
+        2 * Math.PI * Math.sqrt(Math.pow(6367.4447 + avgAlt, 3) / 398600.4418)
+      )
+    };
+  });
