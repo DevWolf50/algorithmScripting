@@ -47,3 +47,13 @@ const convertToRoman = (num = 0, map = {}) =>
 
     return accu;
   }, '');
+
+//Caesar Cipher
+//takes a encoded string
+//returns a decoded string using rot13
+
+//all letters will be uppercased
+const rotate13 = (ltr = '') =>
+  String.fromCharCode(((ltr.charCodeAt(0) - 65 + 13) % 26) + 65);
+
+const caesarsCipher = str => str.replace(/\w/gi, rotate13);
