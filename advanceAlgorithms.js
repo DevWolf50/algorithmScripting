@@ -57,3 +57,68 @@ const rotate13 = (ltr = '') =>
   String.fromCharCode(((ltr.charCodeAt(0) - 65 + 13) % 26) + 65);
 
 const caesarsCipher = str => str.replace(/\w/gi, rotate13);
+
+//us tele number validator
+
+const teleValidator = str => {
+  const regexCheck = /^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})$/;
+  const countryCodeCheck = /^\d[\s(]/;
+
+  if (countryCodeCheck.test(str) && str[0] != 1) {
+    return 'not valid country code';
+  }
+
+  return regexCheck.test(str);
+};
+
+//Cash Register
+
+//a cash drawrer function that will take:
+//cost of item
+//amount paid
+//cash in drawer
+//Will output status and change
+
+function checkCashRegister(cost = 0, paid = 0, cid = []) {
+  //determine if there is enough cash in drawer
+  const totalCID = parseFloat(
+    cid.reduce((accu, curr) => accu + curr[1], 0).toFixed(2)
+  );
+
+  let change = parseFloat((paid - cost).toFixed(2));
+
+  if (totalCID < change) {
+    return { status: 'INSUFFICIENT_FUNDS', change: [] };
+  }
+
+  if (totalCID == change) {
+    return { status: 'CLOSED', change: cid };
+  }
+
+  const currencyMap = {
+    PENNY: 0.01,
+    NICKEL: 0.05,
+    DIME: 0.1,
+    QUARTER: 0.25,
+    ONE: 1,
+    FIVE: 5,
+    TEN: 10,
+    TWENTY: 20,
+    'ONE HUNDRED': 100
+  };
+
+  //greedy change function
+  const changeArray = cid.reduceRight((accu, curr) => {
+    if (currencyMap[curr[0]] > change) return accu;
+    if (change >= curr[1]) {
+      change -= curr[1];
+      return [...accu, curr];
+    }
+    const value =
+      currencyMap[curr[0]] * Math.trunc(change / currencyMap[curr[0]]);
+    change -= value;
+    change = change.toFixed(2);
+    return [...accu, [curr[0], value]];
+  }, []);
+  return { Status: 'OPEN', change: changeArray };
+}
