@@ -1,4 +1,4 @@
-//palinddrome checker
+QUO; //palinddrome checker
 //will check if the given string is a palinddrome if not will return false
 
 //remove all non alphanumeric characters
